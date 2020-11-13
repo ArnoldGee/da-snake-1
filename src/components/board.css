@@ -1,0 +1,36 @@
+.board-container {
+  position: relative;
+  width: 80%;
+  max-width: 500px;
+  margin: auto;
+}
+
+.board-container:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.board {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-template-rows: repeat(16, 1fr);
+  justify-content: center;
+  gap: 4px;
+}
+.square--b {
+  background-color: #09080e;
+  
+}
+.square--s {
+  background-color:  #50fa7b;
+}
+.square--f {
+  background-color: #ffb86c;
+}
+.square--o {
+  background-color: #ff5555;
+}
