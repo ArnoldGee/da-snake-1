@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/da-snake-1/static/css/main.2e164ff8.chunk.css",
+    "main.js": "/da-snake-1/static/js/main.4d46c9dd.chunk.js",
+    "main.js.map": "/da-snake-1/static/js/main.4d46c9dd.chunk.js.map",
+    "runtime-main.js": "/da-snake-1/static/js/runtime-main.04ac7fb4.js",
+    "runtime-main.js.map": "/da-snake-1/static/js/runtime-main.04ac7fb4.js.map",
+    "static/js/2.bba774e8.chunk.js": "/da-snake-1/static/js/2.bba774e8.chunk.js",
+    "static/js/2.bba774e8.chunk.js.map": "/da-snake-1/static/js/2.bba774e8.chunk.js.map",
+    "index.html": "/da-snake-1/index.html",
+    "static/css/main.2e164ff8.chunk.css.map": "/da-snake-1/static/css/main.2e164ff8.chunk.css.map",
+    "static/js/2.bba774e8.chunk.js.LICENSE.txt": "/da-snake-1/static/js/2.bba774e8.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/da-snake-1/static/media/8-bit_arcade_out-webfont.f6c9bfd3.woff2"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.04ac7fb4.js",
+    "static/js/2.bba774e8.chunk.js",
+    "static/css/main.2e164ff8.chunk.css",
+    "static/js/main.4d46c9dd.chunk.js"
+  ]
+}
