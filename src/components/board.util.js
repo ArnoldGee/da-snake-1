@@ -1,5 +1,5 @@
 function createBoard() {
-  const arr = [];
+  let arr = [];
 
   /********************************
    * BOARD CODE:
@@ -15,7 +15,34 @@ function createBoard() {
       arr[i].push('b');
     }
   }
+  arr = addFood(arr)
+
   return arr;
 }
 
-export {createBoard};
+function addFood(board) {
+  const newBoard = [...board];
+  newBoard[Math.floor(Math.random()*16)][Math.floor(Math.random()*16)] = 'f'
+  return newBoard;
+}
+
+const starterSnake = [
+  {
+    x: 2,
+    y: 3,
+  },
+  {
+    x: 3,
+    y: 3,
+  },
+  {
+    x: 4,
+    y: 3,
+  },
+  {
+    x: 5,
+    y: 3
+  }
+];
+
+export {createBoard, starterSnake, addFood};

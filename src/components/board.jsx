@@ -1,26 +1,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 
-import {createBoard} from './board.util';
+import {createBoard, starterSnake, addFood} from './board.util';
 import './board.css';
-
-const starterSnake = [
-  {
-    x: 2,
-    y: 3,
-  },
-  {
-    x: 3,
-    y: 3,
-  },
-  {
-    x: 4,
-    y: 3,
-  },
-  {
-    x: 5,
-    y: 3
-  }
-];
 
 const Board = () => {
   const [board, setBoard] = useState(createBoard());
@@ -28,20 +9,18 @@ const Board = () => {
   const [snake, setSnake] = useState(starterSnake);
 
   useEffect(() => {
-    
     document.addEventListener('keydown', handleKeypress);
+    document.getElementById("left").addEventListener("click", ()=> {
+      setDirection('left')
+    })
+    document.getElementById("top").addEventListener("click", ()=>{setDirection('up')})
+    document.getElementById("bottom").addEventListener("click", ()=>{setDirection('down')})
+    document.getElementById("right").addEventListener("click", ()=>{setDirection('right')})
+
     return () => {
       document.removeEventListener('keydown', handleKeypress);
     };
   }, []);
-
-  const handleTime = () => {
-    snakeMove();
-    // cleanup snake path
-    // make the snake move forward
-    // update the board
-    updateBoard();
-  };
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -61,60 +40,55 @@ const Board = () => {
     }, [delay]);
   }
 
-  useInterval(handleTime, 100);
+  useInterval(() => {
+    snakeMove();
+    updateBoard();
+  }, 100);
 
   const snakeMove = () => {
     const newSnake = [...snake];
-    // const movement = {
-    //   x: {
-    //     up: 0,
-    //     down: 0,
-    //     left: -1,
-    //     right: 1,
-    //   },
-    //   y: {
-    //     up: -1,
-    //     down: 1,
-    //     left: 0,
-    //     right: 0,
-    //   },
-    // };
 
     let newX = newSnake[newSnake.length - 1].x;
     let newY = newSnake[newSnake.length - 1].y;
 
-    switch(direction){
+    switch (direction) {
       case 'right':
-        newX = (newX + 1) % 16
+        newX = (newX + 1) % 16;
         break;
-      case 'left': 
-        newX = (newX - 1 + 16) % 16
+      case 'left':
+        newX = (newX - 1 + 16) % 16;
         break;
       case 'up':
-        newY = Math.abs(newY - 1 + 16) % 16
+        newY = Math.abs(newY - 1 + 16) % 16;
         break;
       case 'down':
-        newY = (newY + 1) % 16
+        newY = (newY + 1) % 16;
         break;
       default:
         break;
-    } 
-
-    newSnake.shift();
+    }
     newSnake.push({
       x: newX,
-      y: newY
+      y: newY,
     });
+    if (isEatingFood(newX, newY)) {
+      setBoard(addFood(board));
+    } else {
+      newSnake.shift();
+    }
     setSnake(newSnake);
-    console.log(snake)
+  };
+
+  const isEatingFood = (x, y) => {
+    return board[y][x] === 'f';
   };
 
   const updateBoard = () => {
-    const newBoard = [...board]
-    newBoard[snake[snake.length-1].y][snake[snake.length-1].x] = 's'
-    newBoard[snake[0].y][snake[0].x] = 'b'
+    const newBoard = [...board];
+    newBoard[snake[snake.length - 1].y][snake[snake.length - 1].x] = 's';
+    newBoard[snake[0].y][snake[0].x] = 'b';
     setBoard(newBoard);
-  }
+  };
 
   const handleKeypress = (event) => {
     switch (event.keyCode) {
@@ -129,6 +103,7 @@ const Board = () => {
         break;
       case 40:
         setDirection('down');
+        break;
       default:
         break;
     }
@@ -145,7 +120,6 @@ const Board = () => {
             />
           ))
         )}
-        <h1 style={{position: 'absolute'}}>{direction}</h1>
       </div>
     </div>
   );
